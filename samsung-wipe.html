@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Samsung Galaxy Android System Wipe</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            color: white;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* 1. INITIAL CHAT / PHONE APP BACKGROUND */
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background-image: url('chat-bg.jpg'); /* Replace with a screenshot of Bob's chat app */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 2. MOBILE DIGITAL MATRIX FLASH GLITCH OVERLAY */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #ffffff;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Rapid digital screen flash and matrix snap down */
+        .trigger-glitch-collapse {
+            animation: mobile-glitch-off 0.4s ease-out forwards;
+        }
+
+        /* 3. SAMSUNG ANDROID ERASE/RESET INTERFACE */
+        .android-reset-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 10000;
+        }
+
+        .center-content {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 85%;
+        }
+
+        /* Authentic Minimalist Android Storage Erase Circle Indicator */
+        .android-loader {
+            width: 65px;
+            height: 65px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #3b82f6; /* Android Blue */
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            animation: spin 1.2s linear infinite;
+        }
+
+        .status-text {
+            font-size: 24px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-text {
+            font-size: 14px;
+            color: #888888;
+            line-height: 1.5;
+        }
+
+        /* 4. KEYFRAME ANIMATION MATRICES */
+        @keyframes mobile-glitch-off {
+            0% { opacity: 0; transform: scale(1); }
+            10% { opacity: 0.9; background: #ffffff; transform: scaleY(1.02); }
+            30% { opacity: 1; background: #3b82f6; transform: scaleY(0.01) scaleX(1); }
+            50% { opacity: 1; background: #ffffff; transform: scaleY(0.005) scaleX(0.1); }
+            70% { opacity: 0.8; transform: scale(0.001); }
+            100% { opacity: 0; transform: scale(0); background: #000000; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mockup of Bob's phone interface -->
+    <div class="phone-screen"></div>
+
+    <!-- Mobile Flash Overlay -->
+    <div id="flashLayer" class="glitch-overlay"></div>
+
+    <!-- Authentic Samsung Factory Reset screen layout -->
+    <div id="androidScreen" class="android-reset-screen">
+        <div class="center-content">
+            <div class="android-loader"></div>
+            <div class="status-text">Erasing</div>
+            <div class="sub-text">Optimizing applications...<br><span id="percent">0</span>% completed</div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURATION: Timing to match your scene execution
+        const delayBeforeWipe = 3000; // 3 seconds
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                triggerMobileWipe();
+            }, delayBeforeWipe);
+        });
+
+        function triggerMobileWipe() {
+            const flash = document.getElementById('flashLayer');
+            const androidScreen = document.getElementById('androidScreen');
+            const percentLabel = document.getElementById('percent');
+
+            // 1. Fire the digital flash/collapse clip
+            flash.classList.add('trigger-glitch-collapse');
+
+            // 2. Flip directly onto the Samsung Erasing menu
+            setTimeout(() => {
+                androidScreen.style.display = 'block';
+                
+                // 3. Increment formatting percentages realistically for camera lenses
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.floor(Math.random() * 6) + 2; 
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        // Drops the display completely dark 1.5 seconds after completion
+                        setTimeout(() => { androidScreen.style.display = 'none'; }, 1500);
+                    }
+                    percentLabel.innerText = progress;
+                }, 350); 
+
+            }, 400); // Transitions exactly as the 0.4s flash keyframe completes
+        }
+    </script>
+</body>
+</html>
